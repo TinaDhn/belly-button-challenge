@@ -37,28 +37,6 @@ function init() {
     });
 };
 
-// define buildMetadata method
-function buildMetadata(sample) {
-
-    d3.json(url).then((data) => {
-        let metadata = data.metadata;
-        let value = metadata.filter(result => result.id == sample);
-        console.log(value)
-        let valueData = value[0];
-
-        // Clear data
-        d3.select("#sample-metadata").html("");
-
-        
-        Object.entries(valueData).forEach(([key,value]) => {
-
-            console.log(key,value);
-
-            d3.select("#sample-metadata").append("h5").text(`${key}: ${value}`);
-        });
-    });
-
-};
 
 //bar chart
 function buildBarChart(sample) {
@@ -136,6 +114,29 @@ function buildBubbleChart(sample) {
 
         Plotly.newPlot("bubble", [trace1], layout)
     });
+};
+
+// define buildMetadata method
+function buildMetadata(sample) {
+
+    d3.json(url).then((data) => {
+        let metadata = data.metadata;
+        let value = metadata.filter(result => result.id == sample);
+        console.log(value)
+        let valueData = value[0];
+
+        // Clear data
+        d3.select("#sample-metadata").html("");
+
+        
+        Object.entries(valueData).forEach(([key,value]) => {
+
+            console.log(key,value);
+
+            d3.select("#sample-metadata").append("h5").text(`${key}: ${value}`);
+        });
+    });
+
 };
 
 
